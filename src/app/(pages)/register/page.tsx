@@ -14,6 +14,8 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { registerUser } from '@/api/register-user'
+
 export interface RegisterParams {
   searchParams: { username: string }
 }
@@ -33,8 +35,10 @@ export default function Page({ searchParams }: RegisterParams) {
     },
   })
 
-  const handleRegister = (data: RegisterFormSchema) => {
-    console.log(data)
+  const handleRegister = async (data: RegisterFormSchema) => {
+    try {
+      await registerUser({ name: data.name, username: data.username })
+    } catch {}
   }
 
   const { username } = searchParams
