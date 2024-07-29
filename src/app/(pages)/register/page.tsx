@@ -10,6 +10,7 @@ import {
   Text,
 } from '@ignite-ui-rcnald/react'
 import { ArrowRight } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -28,6 +29,7 @@ const registerFormSchema = z.object({
 type RegisterFormSchema = z.infer<typeof registerFormSchema>
 
 export default function Page({ searchParams }: RegisterParams) {
+  const router = useRouter()
   const { register, handleSubmit, setValue } = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -38,6 +40,8 @@ export default function Page({ searchParams }: RegisterParams) {
   const handleRegister = async (data: RegisterFormSchema) => {
     try {
       await registerUser({ name: data.name, username: data.username })
+
+      router.push('register/connect-calendar')
     } catch {}
   }
 
