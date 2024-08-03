@@ -6,7 +6,7 @@ import { env } from '@/env'
 
 import { PrismaAdapter } from './auth/prisma-adapter'
 
-export const { handlers, signIn, signOut, auth } = NextAuth(
+export const { auth, handlers, signIn, signOut } = NextAuth(
   (req?: NextRequest) => ({
     adapter: PrismaAdapter(req),
     providers: [
