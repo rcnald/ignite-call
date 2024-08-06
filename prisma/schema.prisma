@@ -12,6 +12,7 @@ model User {
   username   String   @unique
   name       String
   email      String?  @unique
+  bio        String?
   avatar_url String?
   created_at DateTime @default(now())
 
@@ -64,7 +65,7 @@ model UserTimeInterval {
   time_start_in_minutes Int
   time_end_in_minutes   Int
 
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 
   @@map("user_time_intervals")

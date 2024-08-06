@@ -11,6 +11,7 @@ import {
   Text,
 } from '@ignite-ui-rcnald/react'
 import { ArrowRight } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -62,6 +63,8 @@ type TimeIntervalsInput = z.input<typeof timeIntervalsSchema>
 type TimeIntervalsOutput = z.output<typeof timeIntervalsSchema>
 
 export default function Page() {
+  const router = useRouter()
+
   const {
     register,
     handleSubmit,
@@ -85,6 +88,8 @@ export default function Page() {
 
   const handleSetTimeIntervals = async ({ intervals }: TimeIntervalsOutput) => {
     await api.post('/users/time-intervals', { intervals })
+
+    router.push('/register/update-profile')
   }
 
   const { fields } = useFieldArray({

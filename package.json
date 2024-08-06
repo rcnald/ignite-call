@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
-    "@ignite-ui-rcnald/react": "^4.2.0",
+    "@ignite-ui-rcnald/react": "^4.3.0",
     "@ignite-ui-rcnald/tokens": "^2.1.0",
     "@prisma/client": "^5.17.0",
     "@t3-oss/env-nextjs": "^0.11.0",

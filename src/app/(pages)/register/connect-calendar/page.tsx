@@ -2,17 +2,23 @@
 
 import { Box, Button, Heading, MultiStep, Text } from '@ignite-ui-rcnald/react'
 import { ArrowRight, Check } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useQueryState } from 'nuqs'
 
 import { signInGoogle } from '@/lib/actions'
 
 export default function Page() {
-  const { data, status } = useSession()
+  const { status } = useSession()
+  const router = useRouter()
   const [error] = useQueryState('error')
 
   const hasAuthError = Boolean(error)
   const isSignIn = status === 'authenticated'
+
+  const handleNextStep = () => {
+    router.push('/register/time-intervals')
+  }
 
   return (
     <div className="mx-auto mt-24 max-w-[540px]">
@@ -50,12 +56,11 @@ export default function Page() {
             </Text>
           ) : null}
 
-          <Button disabled={!isSignIn}>
+          <Button type="button" onClick={handleNextStep}>
             Próximo passo
             <ArrowRight />
           </Button>
         </Box>
-        <Text>{JSON.stringify(data, null, 2)}</Text>
       </form>
     </div>
   )
