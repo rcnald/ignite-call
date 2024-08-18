@@ -5,6 +5,8 @@ import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { SessionProvider } from 'next-auth/react'
 
+import { QueryClient } from '@/context/react-query'
+
 const roboto = Roboto({ subsets: ['latin'], weight: ['500', '400', '700'] })
 
 export const metadata: Metadata = {
@@ -22,7 +24,9 @@ export default function RootLayout({
       <body
         className={(roboto.className, 'min-h-screen bg-gray900 text-gray100')}
       >
-        <SessionProvider>{children}</SessionProvider>
+        <QueryClient>
+          <SessionProvider>{children}</SessionProvider>
+        </QueryClient>
       </body>
     </html>
   )
