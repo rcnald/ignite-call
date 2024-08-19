@@ -17,6 +17,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth(
           params: {
             scope:
               'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/calendar',
+            access_type: 'offline',
+            prompt: 'consent',
           },
         },
         profile(profile: GoogleProfile) {

@@ -16,7 +16,11 @@ interface Availability {
   availableTimes: number[]
 }
 
-export function CalendarStep() {
+interface CalendarProps {
+  onSelectDateTime: (date: Date) => void
+}
+
+export function CalendarStep({ onSelectDateTime }: CalendarProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
   const { username } = useParams<{ username: string }>()
 
@@ -25,6 +29,15 @@ export function CalendarStep() {
   const weekDay = selectedDate ? dayjs(selectedDate).format('dddd') : null
   const day = selectedDate ? dayjs(selectedDate).format('DD') : null
   const month = selectedDate ? dayjs(selectedDate).format('MMMM') : null
+
+  const handleSelectTime = (hour: number) => {
+    const dateTime = dayjs(selectedDate)
+      .set('hour', hour)
+      .startOf('hour')
+      .toDate()
+
+    onSelectDateTime(dateTime)
+  }
 
   const { data: availability } = useQuery({
     queryKey: ['availability', selectedDate],
@@ -67,6 +80,7 @@ export function CalendarStep() {
                 <button
                   key={time}
                   disabled={isTimesReserved}
+                  onClick={() => handleSelectTime(time)}
                   className="cursor-pointer rounded-sm bg-gray600 py-2 text-sm leading-base text-gray100 last:mb-6 disabled:cursor-default disabled:bg-none disabled:opacity-40 [&:not(:disabled)]:hover:bg-gray500"
                 >
                   {time}:00h

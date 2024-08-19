@@ -2,9 +2,13 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Box, Button, Input, Text, Textarea } from '@ignite-ui-rcnald/react'
+import dayjs from 'dayjs'
 import { Calendar, Clock } from 'lucide-react'
+import { useParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { api } from '@/lib/axios'
 
 const confirmFormSchema = z.object({
   name: z
@@ -16,7 +20,12 @@ const confirmFormSchema = z.object({
 
 type ConfirmFormSchema = z.infer<typeof confirmFormSchema>
 
-export function ConfirmStep() {
+interface ConfirmStepProps {
+  schedulingDate: Date
+  onCancel: () => void
+}
+
+export function ConfirmStep({ schedulingDate, onCancel }: ConfirmStepProps) {
   const {
     register,
     handleSubmit,
@@ -25,7 +34,23 @@ export function ConfirmStep() {
     resolver: zodResolver(confirmFormSchema),
   })
 
-  const handleConfirmScheduling = () => {}
+  const { username } = useParams<{ username: string }>()
+
+  const date = dayjs(schedulingDate).format('DD[ de ]MMMM[ de ]YYYY')
+  const time = dayjs(schedulingDate).format('HH:mm[h]')
+
+  const handleConfirmScheduling = async (data: ConfirmFormSchema) => {
+    const { email, name, observations } = data
+
+    await api.post(`/users/${username}/schedule`, {
+      email,
+      name,
+      observations,
+      date: schedulingDate,
+    })
+
+    onCancel()
+  }
 
   return (
     <Box className="mx-auto mt-6 max-w-[540px]">
@@ -36,11 +61,11 @@ export function ConfirmStep() {
         <div className="mb-2 flex items-center gap-4 border-b border-gray600 pb-6">
           <Text className="flex items-center gap-2">
             <Calendar className="size-5 text-gray200" />
-            22 de setembro de 2022
+            {date}
           </Text>
           <Text className="flex items-center gap-2">
             <Clock className="size-5 text-gray200" />
-            18:00h
+            {time}
           </Text>
         </div>
 
@@ -70,7 +95,7 @@ export function ConfirmStep() {
         </label>
 
         <div className="flex justify-end gap-2">
-          <Button type="button" variant="ghost">
+          <Button type="button" variant="ghost" onClick={onCancel}>
             Cancelar
           </Button>
           <Button type="submit" disabled={isSubmitting}>
