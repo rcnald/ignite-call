@@ -43,7 +43,7 @@ export async function POST(
 
   const conflictingScheduling = await prisma.scheduling.findFirst({
     where: {
-      userId: user.id,
+      user_id: user.id,
       date: schedulingDate.toDate(),
     },
   })
@@ -61,7 +61,7 @@ export async function POST(
       email,
       observations,
       date: schedulingDate.toDate(),
-      userId: user.id,
+      user_id: user.id,
     },
   })
 

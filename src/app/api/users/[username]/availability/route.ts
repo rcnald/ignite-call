@@ -57,7 +57,7 @@ export async function GET(
 
   const blockedTimes = await prisma.scheduling.findMany({
     where: {
-      userId: user.id,
+      user_id: user.id,
       date: {
         gte: referenceDate.set('hour', startHour).toDate(),
         lte: referenceDate.set('hour', endHour).toDate(),

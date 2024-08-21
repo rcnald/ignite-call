@@ -1,11 +1,15 @@
-'use client'
-
-import { Heading, Text } from '@ignite-ui-rcnald/react'
+import type { Metadata } from 'next'
 import Image from 'next/image'
 
 import preview from '@/assets/app-preview.png'
+import Heading from '@/components/ui/heading'
+import Text from '@/components/ui/text'
 
 import { ClaimUserForm } from './components/claim-user-form'
+
+export const metadata: Metadata = {
+  title: 'Descomplique sua agenda',
+}
 
 export default function Home() {
   return (

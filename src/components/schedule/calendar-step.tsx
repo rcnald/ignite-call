@@ -64,14 +64,14 @@ export function CalendarStep({ onSelectDateTime }: CalendarProps) {
     >
       <Calendar onDateSelected={setSelectedDate} />
       {isDateSelected ? (
-        <div className="absolute bottom-0 right-0 top-0 w-[280px] overflow-y-scroll border-l border-gray600 p-6 pb-0">
+        <div className="border-l border-gray600 p-6 pb-0">
           <Text className="font-medium">
             {weekDay}{' '}
             <span className="text-gray200">
               {day} de {month}
             </span>
           </Text>
-          <div className="mt-3 grid grid-cols-1 gap-2 max-lg:grid-cols-2">
+          <div className="mt-3 grid max-h-[450px] grid-cols-1 gap-2 overflow-y-scroll">
             {availability?.possibleTimes.map((time) => {
               const isTimesReserved =
                 !availability.availableTimes.includes(time)
@@ -81,7 +81,7 @@ export function CalendarStep({ onSelectDateTime }: CalendarProps) {
                   key={time}
                   disabled={isTimesReserved}
                   onClick={() => handleSelectTime(time)}
-                  className="cursor-pointer rounded-sm bg-gray600 py-2 text-sm leading-base text-gray100 last:mb-6 disabled:cursor-default disabled:bg-none disabled:opacity-40 [&:not(:disabled)]:hover:bg-gray500"
+                  className="h-fit cursor-pointer rounded-sm bg-gray600 py-2 text-sm leading-base text-gray100 last:mb-6 disabled:cursor-default disabled:bg-none disabled:opacity-40 [&:not(:disabled)]:hover:bg-gray500"
                 >
                   {time}:00h
                 </button>
