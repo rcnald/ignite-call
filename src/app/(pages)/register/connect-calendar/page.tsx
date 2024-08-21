@@ -5,6 +5,7 @@ import { ArrowRight, Check } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useQueryState } from 'nuqs'
+import { Suspense } from 'react'
 
 import { signInGoogle } from '@/lib/actions'
 
@@ -49,12 +50,14 @@ export default function Page() {
               </Button>
             )}
           </Box>
-          {hasAuthError ? (
-            <Text size="sm" className="text-red-500">
-              Falha ao se conectar ao Google, verifique se você habilitou as
-              permissões de acesso ao Google Calendar
-            </Text>
-          ) : null}
+          <Suspense fallback={<div>Loading...</div>}>
+            {hasAuthError ? (
+              <Text size="sm" className="text-red-500">
+                Falha ao se conectar ao Google, verifique se você habilitou as
+                permissões de acesso ao Google Calendar
+              </Text>
+            ) : null}
+          </Suspense>
 
           <Button type="button" onClick={handleNextStep}>
             Próximo passo
