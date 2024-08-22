@@ -14,7 +14,7 @@ export async function GET(
   const { username } = params
 
   const date = searchParams.get('date')
-  const timezoneOffset = searchParams.get('timezoneOffset ')
+  const timezoneOffset = searchParams.get('timezoneOffset')
 
   if (!date || !timezoneOffset) {
     return NextResponse.json(
