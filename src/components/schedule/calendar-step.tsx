@@ -47,7 +47,10 @@ export function CalendarStep({ onSelectDateTime }: CalendarProps) {
       const response = await api.get<Availability>(
         `/users/${username}/availability`,
         {
-          params: { date: dayjs(selectedDate).format('YYYY-MM-DD') },
+          params: {
+            date: dayjs(selectedDate).format('YYYY-MM-DD'),
+            timezoneOffset: selectedDate ? selectedDate.getTimezoneOffset() : 0,
+          },
         },
       )
 
