@@ -100,6 +100,7 @@ Tecnologias e bibliotecas utilizadas para a construção do projeto.
 - [next-auth](https://next-auth.js.org/)
 - [googleapis](https://developers.google.com/apis-explorer)
 - [prisma](https://www.prisma.io/)
+- [ignite-design-system](https://github.com/rcnald/ignite-design-system)
 - [react](https://react.dev/)
 - [typescript](https://www.typescriptlang.org/)
 - [axios](https://axios-http.com/)
