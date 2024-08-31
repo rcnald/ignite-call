@@ -18,12 +18,6 @@ Antes de começar, certifique-se de ter o [Node.js](https://nodejs.org/) instala
 
 ## Como Usar
 
-Aqui está uma versão corrigida e formatada do seu guia de configuração:
-
----
-
-### Passos para Configuração do Projeto Ignite Call
-
 1. **Clone este repositório:**
    ```bash
    git clone https://github.com/rcnald/ignite-call.git
